@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shao Yuya — Digital Education &amp; EdTech</title>
+  <meta name="description" content="Hi, I'm Shao Yuya. Master's student in Digital Education, Partner at an edtech startup, and former capital markets paralegal." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231d1d1f'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ES%3C/text%3E%3C/svg%3E" />
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      else if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="logo" href="index.html">
+        <span class="logo-mark">S</span>
+        Shao Yuya
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <span class="icon-moon">&#127769;</span>
+          <span class="icon-sun">&#9728;&#65039;</span>
+        </button>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-bg">
+        <div class="hero-orb hero-orb--1"></div>
+        <div class="hero-orb hero-orb--2"></div>
+        <div class="hero-orb hero-orb--3"></div>
+      </div>
+      <div class="container hero-grid">
+        <div class="hero-photo">
+          <img
+            src="photo.jpg"
+            alt="Portrait of Shao Yuya"
+            width="280" height="280"
+          />
+        </div>
+        <div class="hero-text">
+          <span class="hero-kicker">MSc Digital Education · XJTLU</span>
+          <h1>Hi, I'm Shao Yuya.</h1>
+          <p class="lead">
+            I'm a master's student in Digital Education at XJTLU. I'm passionate about how
+            technology and innovative pedagogy can improve learning outcomes and access.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="resume.html">View my resume</a>
+            <a class="btn-link" href="contact.html">Get in touch</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three things I love -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">About me</span>
+          <h2>Three things I love.</h2>
+          <p>Beyond work and study, these keep me inspired and energized.</p>
+        </div>
+        <div class="card-grid">
+          <article class="like-card reveal">
+            <span class="emoji">&#128247;</span>
+            <h3>Photography</h3>
+            <p>Capturing moments and stories through the lens — from city streets to mountain slopes, every frame is a way of seeing the world differently.</p>
+          </article>
+
+          <article class="like-card reveal">
+            <span class="emoji">&#127924;</span>
+            <h3>Mahjong</h3>
+            <p>A game of skill, strategy, and timing. I even run my own Japanese mahjong club in Shanghai — it's as much about community as it is about the tiles.</p>
+          </article>
+
+          <article class="like-card reveal">
+            <span class="emoji">&#9975;&#65039;</span>
+            <h3>Skiing</h3>
+            <p>There's nothing like the freedom of a mountain in winter. Skiing is my reset button — cold air, clean lines, and the thrill of a good run.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-fun">
+        <span class="fun-label">Fun fact</span>
+        <p>I run my own Japanese mahjong club in Shanghai — we play regularly riichi rules, and yes, I take it seriously.</p>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year"></span> Shao Yuya. All rights reserved.</span>
+        <ul class="footer-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

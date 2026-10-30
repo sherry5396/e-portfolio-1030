@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Shao Yuya</title>
+  <meta name="description" content="Projects by Shao Yuya — interactive web apps and digital learning initiatives." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231d1d1f'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ES%3C/text%3E%3C/svg%3E" />
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      else if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="logo" href="index.html">
+        <span class="logo-mark">S</span>
+        Shao Yuya
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="projects.html" aria-current="page">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <span class="icon-moon">&#127769;</span>
+          <span class="icon-sun">&#9728;&#65039;</span>
+        </button>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container reveal">
+        <span class="eyebrow">My work</span>
+        <h1>Projects.</h1>
+        <p>A selection of projects I've built and contributed to. Click any project to explore it in detail.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="project-index reveal">
+
+          <a class="project-card" href="project-todo.html">
+            <span class="project-number">01</span>
+            <div class="project-card-body">
+              <h2>Interactive To-do List</h2>
+              <p>A mobile-friendly planning app with calendar, priorities, emoji, and recurring tasks — all saved in your browser.</p>
+              <div class="project-tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">localStorage</span>
+                <span class="tag">Responsive</span>
+              </div>
+            </div>
+            <span class="project-card-arrow" aria-hidden="true">&#8594;</span>
+          </a>
+
+          <a class="project-card" href="project-weather.html">
+            <span class="project-number">02</span>
+            <div class="project-card-body">
+              <h2>Weather App</h2>
+              <p>Search any city and get its current temperature, conditions, and a matching weather icon — powered by the UAPI Weather API.</p>
+              <div class="project-tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Fetch API</span>
+                <span class="tag">Responsive</span>
+              </div>
+            </div>
+            <span class="project-card-arrow" aria-hidden="true">&#8594;</span>
+          </a>
+
+          <a class="project-card" href="project-worldtime.html">
+            <span class="project-number">03</span>
+            <div class="project-card-body">
+              <h2>World Time</h2>
+              <p>Search any city and watch its local time tick live — with the day, date, and time zone at a glance, powered by the UAPI World Time API.</p>
+              <div class="project-tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Fetch API</span>
+                <span class="tag">Responsive</span>
+              </div>
+            </div>
+            <span class="project-card-arrow" aria-hidden="true">&#8594;</span>
+          </a>
+
+          <a class="project-card" href="project-english.html">
+            <span class="project-number">04</span>
+            <div class="project-card-body">
+              <h2>Word Play</h2>
+              <p>A cute, picture-first English word quiz for children aged 3–6 — pick the right word to move on, with friendly stickers and a celebration at the end.</p>
+              <div class="project-tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Kids Learning</span>
+                <span class="tag">Responsive</span>
+              </div>
+            </div>
+            <span class="project-card-arrow" aria-hidden="true">&#8594;</span>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="container" style="text-align: center; margin-top: 60px;">
+        <div class="reveal">
+          <h2>Let's talk.</h2>
+          <p style="color: var(--text-muted); max-width: 440px; margin: 12px auto 28px; font-size: 1.1rem;">Whether it's education, edtech, or a legal matter — I'd love to hear from you.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="mailto:yuya.shao26@student.xjtlu.edu.cn">Email me</a>
+            <a class="btn-link" href="contact.html">Contact page</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-fun">
+        <span class="fun-label">Fun fact</span>
+        <p>I run my own Japanese mahjong club in Shanghai — we play regularly riichi rules, and yes, I take it seriously.</p>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year"></span> Shao Yuya. All rights reserved.</span>
+        <ul class="footer-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
