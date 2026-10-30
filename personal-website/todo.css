@@ -1,0 +1,675 @@
+/* ============================================
+   To-do List project — styles scoped to #todo-app
+   (design tokens / base styles come from styles.css)
+   ============================================ */
+
+/* ---------- Project presentation wrapper ---------- */
+.project-feature-head {
+  max-width: 640px;
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
+.project-feature-head p {
+  color: var(--text-muted);
+  margin-top: 12px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.project-feature-head .project-tags {
+  justify-content: center;
+  margin: 18px 0 0;
+}
+
+/* ---------- App shell ---------- */
+.todo-app {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  padding: 32px;
+}
+
+/* Calendar card */
+.todo-calendar {
+  background: var(--bg);
+  border-radius: var(--r-md);
+  padding: 20px;
+  margin-top: 4px;
+}
+
+.cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.cal-header h3 {
+  font-size: 1.02rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cal-nav {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.cal-nav:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.cal-weekdays,
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.cal-weekdays span {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-meta);
+  padding: 6px 0;
+}
+
+/* Day cell */
+.cal-day {
+  min-height: 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.cal-day:hover { background: var(--accent-soft); }
+
+.cal-day.is-muted { opacity: 0.4; }
+
+.cal-num {
+  align-self: flex-start;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cal-day.is-today .cal-num {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+.cal-day.is-selected,
+.cal-day.is-selected:hover {
+  background: var(--accent-soft);
+}
+
+.cal-day.is-selected .cal-num {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: none;
+}
+
+/* In-cell task chips */
+.cal-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cal-chip {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  max-width: 100%;
+  padding: 1px 4px;
+  border-radius: 5px;
+  font-size: 0.62rem;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.cal-chip .chip-emoji { flex-shrink: 0; font-size: 0.66rem; }
+.cal-chip .chip-dot {
+  flex-shrink: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+.cal-chip .chip-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cal-chip.pri-high { background: rgba(255, 59, 48, 0.14); color: #d72b20; }
+.cal-chip.pri-medium { background: rgba(255, 149, 0, 0.16); color: #b25e00; }
+.cal-chip.pri-low { background: rgba(52, 199, 89, 0.16); color: #1c7d35; }
+.cal-chip.pri-high .chip-dot { background: #ff3b30; }
+.cal-chip.pri-medium .chip-dot { background: #ff9500; }
+.cal-chip.pri-low .chip-dot { background: #34c759; }
+
+[data-theme="dark"] .cal-chip.pri-high { background: rgba(255, 69, 58, 0.2); color: #ff6b61; }
+[data-theme="dark"] .cal-chip.pri-medium { background: rgba(255, 159, 10, 0.22); color: #ffb340; }
+[data-theme="dark"] .cal-chip.pri-low { background: rgba(48, 209, 88, 0.2); color: #5de07e; }
+
+.cal-chip.is-done .chip-text { text-decoration: line-through; opacity: 0.65; }
+
+.cal-more {
+  padding: 0 4px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--text-meta);
+}
+
+/* Selected-day agenda inside the calendar card */
+.todo-agenda {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-soft);
+}
+
+/* ---------- Add form ---------- */
+.todo-add {
+  display: flex;
+  gap: 10px;
+}
+
+.todo-add input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--input-bg);
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
+  padding: 11px 18px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.todo-add input::placeholder { color: var(--text-meta); }
+
+.todo-add input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.todo-add .btn {
+  flex-shrink: 0;
+  padding: 11px 24px;
+}
+
+/* Priority + emoji pickers */
+.todo-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 2px 0;
+}
+
+.priority-group {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  background: var(--input-bg);
+  border-radius: var(--r-pill);
+}
+
+.priority-btn {
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 4px 14px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.priority-btn.is-active {
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.priority-btn.is-active[data-priority="high"] {
+  background: rgba(255, 59, 48, 0.14);
+  color: #ff3b30;
+  box-shadow: none;
+}
+
+.priority-btn.is-active[data-priority="medium"] {
+  background: rgba(255, 149, 0, 0.16);
+  color: #c96a00;
+  box-shadow: none;
+}
+
+.priority-btn.is-active[data-priority="low"] {
+  background: rgba(52, 199, 89, 0.16);
+  color: #1f8a3a;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .priority-btn.is-active[data-priority="high"] {
+  background: rgba(255, 69, 58, 0.2);
+  color: #ff453a;
+}
+
+[data-theme="dark"] .priority-btn.is-active[data-priority="medium"] {
+  background: rgba(255, 159, 10, 0.22);
+  color: #ff9f0a;
+}
+
+[data-theme="dark"] .priority-btn.is-active[data-priority="low"] {
+  background: rgba(48, 209, 88, 0.2);
+  color: #30d158;
+}
+
+.emoji-select {
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--text);
+  background-color: var(--input-bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2386868b' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  border: none;
+  border-radius: var(--r-pill);
+  padding: 7px 34px 7px 14px;
+  cursor: pointer;
+}
+
+.emoji-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+/* Repeat option */
+.todo-repeat {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 2px;
+}
+
+.repeat-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.repeat-toggle input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.repeat-icon { font-size: 0.95rem; line-height: 1; }
+
+.repeat-fields {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.repeat-fields input[type="number"] {
+  width: 64px;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--text);
+  background: var(--input-bg);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 5px 8px;
+  text-align: center;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.repeat-fields input[type="number"]::-webkit-outer-spin-button,
+.repeat-fields input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.repeat-fields input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* Recurring-task marker on agenda rows */
+.todo-repeat-mark {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  line-height: 1;
+  opacity: 0.75;
+}
+
+/* ---------- Meta row ---------- */
+.todo-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 2px 12px;
+  flex-wrap: wrap;
+}
+
+.todo-date-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.todo-meta-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.todo-today-btn,
+.todo-clear-btn {
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.todo-today-btn {
+  border: 1px solid var(--border-soft);
+  background: none;
+  color: var(--accent);
+}
+
+.todo-today-btn:hover { background: var(--accent-soft); }
+
+.todo-clear-btn {
+  border: 1px solid var(--border-soft);
+  background: none;
+  color: var(--text-meta);
+}
+
+.todo-clear-btn:hover:not(:disabled) {
+  color: #ff3b30;
+  border-color: rgba(255, 59, 48, 0.35);
+  background: rgba(255, 59, 48, 0.1);
+}
+
+[data-theme="dark"] .todo-clear-btn:hover:not(:disabled) {
+  color: #ff453a;
+  border-color: rgba(255, 69, 58, 0.4);
+  background: rgba(255, 69, 58, 0.14);
+}
+
+.todo-clear-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* ---------- Agenda rows ---------- */
+.todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg);
+  border-radius: var(--r-md);
+  padding: 11px 14px;
+  animation: todoIn 0.22s ease;
+}
+
+@keyframes todoIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
+.todo-check {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.todo-check input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.todo-box {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  display: grid;
+  place-items: center;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  pointer-events: none;
+}
+
+.todo-box::after {
+  content: "";
+  width: 10px;
+  height: 6px;
+  margin-bottom: 2px;
+  border-left: 2px solid var(--on-accent);
+  border-bottom: 2px solid var(--on-accent);
+  transform: rotate(-45deg) scale(0);
+  transition: transform 0.15s ease;
+}
+
+.todo-check input:checked + .todo-box {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.todo-check input:checked + .todo-box::after {
+  transform: rotate(-45deg) scale(1);
+}
+
+.todo-check input:focus-visible + .todo-box {
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.todo-emoji {
+  flex-shrink: 0;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.todo-text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+  font-size: 0.97rem;
+  color: var(--text);
+  transition: color 0.15s ease;
+}
+
+.todo-pri {
+  flex-shrink: 0;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: var(--r-pill);
+  background: var(--input-bg);
+  color: var(--text-meta);
+}
+
+.todo-pri.pri-high {
+  background: rgba(255, 59, 48, 0.12);
+  color: #ff3b30;
+}
+
+.todo-pri.pri-medium {
+  background: rgba(255, 149, 0, 0.14);
+  color: #c96a00;
+}
+
+.todo-pri.pri-low {
+  background: rgba(52, 199, 89, 0.14);
+  color: #1f8a3a;
+}
+
+[data-theme="dark"] .todo-pri.pri-high {
+  background: rgba(255, 69, 58, 0.18);
+  color: #ff453a;
+}
+
+[data-theme="dark"] .todo-pri.pri-medium {
+  background: rgba(255, 159, 10, 0.18);
+  color: #ff9f0a;
+}
+
+[data-theme="dark"] .todo-pri.pri-low {
+  background: rgba(48, 209, 88, 0.18);
+  color: #30d158;
+}
+
+.todo-item.done .todo-text {
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+  color: var(--text-meta);
+}
+
+.todo-item.done .todo-emoji { opacity: 0.45; }
+.todo-item.done .todo-pri { opacity: 0.55; }
+.todo-item.done .todo-repeat-mark { opacity: 0.35; }
+
+.todo-del {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--text-meta);
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.todo-del:hover {
+  background: rgba(255, 59, 48, 0.12);
+  color: #ff3b30;
+}
+
+[data-theme="dark"] .todo-del:hover {
+  background: rgba(255, 69, 58, 0.16);
+  color: #ff453a;
+}
+
+.todo-empty {
+  text-align: center;
+  color: var(--text-meta);
+  font-size: 0.92rem;
+  padding: 32px 0 8px;
+}
+
+/* ---------- Tablet & phone ---------- */
+@media (max-width: 760px) {
+  .todo-app {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .todo-calendar { padding: 14px; }
+
+  .cal-day {
+    min-height: 58px;
+    padding: 2px;
+  }
+
+  .cal-num { width: 20px; height: 20px; font-size: 0.72rem; }
+
+  /* Chips collapse to emoji / priority dot only */
+  .cal-chip .chip-text { display: none; }
+  .cal-chip {
+    justify-content: center;
+    padding: 2px 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .todo-add { flex-wrap: wrap; }
+  .todo-add .btn { width: 100%; }
+
+  .todo-options { flex-direction: column; align-items: stretch; }
+  .priority-group { justify-content: center; }
+  .emoji-select { text-align: center; background-position: right 14px center; }
+
+  .cal-weekdays span,
+  .cal-weekdays { font-size: 0.62rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .todo-item { animation: none; }
+}

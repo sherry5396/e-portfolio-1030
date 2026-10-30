@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do List — Shao Yuya</title>
+  <meta name="description" content="Interactive to-do list app with calendar, priorities, emoji, and recurring tasks." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="todo.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231d1d1f'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ES%3C/text%3E%3C/svg%3E" />
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      else if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="logo" href="index.html">
+        <span class="logo-mark">S</span>
+        Shao Yuya
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="projects.html" aria-current="page">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <span class="icon-moon">&#127769;</span>
+          <span class="icon-sun">&#9728;&#65039;</span>
+        </button>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container reveal">
+        <a href="projects.html" class="back-link">&#8592; All projects</a>
+        <span class="eyebrow">Project 01</span>
+        <h1>Interactive To-do List.</h1>
+        <p>A clean, mobile-friendly planning app. Pick a date on the calendar, add a task with a priority, emoji and optional repeat schedule, then check it off when it's done. Everything is saved in your browser.</p>
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">localStorage</span>
+          <span class="tag">Responsive</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="todo-app" id="todo-app">
+          <form class="todo-add" id="todo-form">
+            <input
+              type="text"
+              id="todo-input"
+              placeholder="Add a task for the selected day&#8230;"
+              maxlength="140"
+              autocomplete="off"
+              aria-label="Task description"
+            />
+            <button type="submit" class="btn btn-primary">Add</button>
+          </form>
+
+          <div class="todo-options">
+            <div class="priority-group" role="group" aria-label="Priority">
+              <button type="button" class="priority-btn" data-priority="low" aria-pressed="false">Low</button>
+              <button type="button" class="priority-btn is-active" data-priority="medium" aria-pressed="true">Medium</button>
+              <button type="button" class="priority-btn" data-priority="high" aria-pressed="false">High</button>
+            </div>
+            <select class="emoji-select" id="emoji-select" aria-label="Emoji">
+              <option value="">No emoji</option>
+              <option value="&#128204;">&#128204; Pin</option>
+              <option value="&#127919;">&#127919; Goal</option>
+              <option value="&#128188;">&#128188; Work</option>
+              <option value="&#128218;">&#128218; Study</option>
+              <option value="&#128161;">&#128161; Idea</option>
+              <option value="&#128722;">&#128722; Shopping</option>
+              <option value="&#127939;">&#127939; Health</option>
+              <option value="&#127881;">&#127881; Fun</option>
+              <option value="&#9992;&#65039;">&#9992;&#65039; Travel</option>
+            </select>
+          </div>
+
+          <div class="todo-repeat">
+            <label class="repeat-toggle">
+              <input type="checkbox" id="repeat-enabled" />
+              <span class="repeat-icon" aria-hidden="true">&#128260;</span>
+              Repeat
+            </label>
+            <div class="repeat-fields" id="repeat-fields" hidden>
+              <span>Every</span>
+              <input type="number" id="repeat-interval" min="1" max="365" value="1" aria-label="Repeat interval in days" />
+              <span>day(s)</span>
+              <span>for</span>
+              <input type="number" id="repeat-duration" min="1" max="730" value="30" aria-label="Recurrence duration in days" />
+              <span>day(s)</span>
+            </div>
+          </div>
+
+          <div class="todo-calendar">
+            <div class="cal-header">
+              <button type="button" class="cal-nav" id="cal-prev" aria-label="Previous month">&#8249;</button>
+              <h3 id="cal-title">Month</h3>
+              <button type="button" class="cal-nav" id="cal-next" aria-label="Next month">&#8250;</button>
+            </div>
+            <div class="cal-weekdays" aria-hidden="true">
+              <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+            </div>
+            <div class="cal-grid" id="cal-grid" role="grid" aria-label="Calendar"></div>
+
+            <div class="todo-agenda">
+              <div class="todo-meta">
+                <span class="todo-date-label" id="todo-date-label"></span>
+                <div class="todo-meta-actions">
+                  <button type="button" class="todo-today-btn" id="cal-today">Today</button>
+                  <button type="button" class="todo-clear-btn" id="todo-clear" disabled>Clear all</button>
+                </div>
+              </div>
+              <ul class="todo-list" id="todo-list" aria-live="polite"></ul>
+              <p class="todo-empty" id="todo-empty" hidden>No tasks yet for this day &#8212; add one above.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-fun">
+        <span class="fun-label">Fun fact</span>
+        <p>I run my own Japanese mahjong club in Shanghai — we play regularly riichi rules, and yes, I take it seriously.</p>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year"></span> Shao Yuya. All rights reserved.</span>
+        <ul class="footer-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+  <script src="todo.js"></script>
+</body>
+</html>
