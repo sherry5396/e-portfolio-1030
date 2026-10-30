@@ -1,0 +1,153 @@
+/* ============================================
+   World Time App project — styles scoped to #worldtime-app
+   (design tokens / base styles come from styles.css)
+   ============================================ */
+
+/* ---------- App shell ---------- */
+.worldtime-app {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  padding: 32px;
+}
+
+/* ---------- Search form ---------- */
+.worldtime-search {
+  display: flex;
+  gap: 10px;
+}
+
+.worldtime-search input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--input-bg);
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
+  padding: 11px 18px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.worldtime-search input::placeholder { color: var(--text-meta); }
+
+.worldtime-search input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.worldtime-search .btn {
+  flex-shrink: 0;
+  padding: 11px 24px;
+}
+
+/* ---------- Status message (hint / loading / error) ---------- */
+.worldtime-status {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  padding: 28px 12px;
+}
+
+.worldtime-status[hidden] { display: none; }
+.worldtime-status.is-loading { animation: worldtimePulse 1.2s ease-in-out infinite; }
+.worldtime-status.is-error { color: #ff3b30; }
+
+[data-theme="dark"] .worldtime-status.is-error { color: #ff453a; }
+
+@keyframes worldtimePulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+/* ---------- Result card ---------- */
+.worldtime-result {
+  background: var(--bg);
+  border-radius: var(--r-md);
+  padding: 32px 24px 28px;
+  text-align: center;
+  animation: worldtimeIn 0.25s ease;
+}
+
+.worldtime-result[hidden] { display: none; }
+
+@keyframes worldtimeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.worldtime-city {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+  margin-bottom: 14px;
+}
+
+.worldtime-clock {
+  font-size: 3.4rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.05;
+}
+
+.worldtime-date {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-top: 8px;
+}
+
+.worldtime-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.worldtime-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.worldtime-chip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 480px) {
+  .worldtime-app {
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .worldtime-search { flex-wrap: wrap; }
+  .worldtime-search .btn { width: 100%; justify-content: center; }
+
+  .worldtime-result { padding: 24px 16px; }
+  .worldtime-clock { font-size: 2.6rem; }
+  .worldtime-date { font-size: 0.95rem; }
+  .worldtime-meta { margin-top: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .worldtime-result { animation: none; }
+  .worldtime-status.is-loading { animation: none; }
+}
